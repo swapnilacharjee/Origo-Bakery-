@@ -135,8 +135,13 @@ export default function App() {
 
   // Realtime Firebase Firestore Listeners
   useEffect(() => {
+    let unsubShop: (() => void) | undefined;
+    let unsubConfig: (() => void) | undefined;
+    let unsubProducts: (() => void) | undefined;
+
+    waitForAuth().then(() => {
     // 1. Shop Settings Firebase Sync
-    const unsubShop = subscribeShopSettings((firebaseSettings) => {
+    unsubShop = subscribeShopSettings((firebaseSettings) => {
       setShopSettings(prev => ({
         ...DEFAULT_SHOP_SETTINGS,
         ...firebaseSettings,
@@ -151,7 +156,7 @@ export default function App() {
     });
 
     // 2. App Config (Google Sheets URL) Firebase Sync
-    const unsubConfig = subscribeAppConfig((firebaseConfig) => {
+    unsubConfig = subscribeAppConfig((firebaseConfig) => {
       if (firebaseConfig.webAppUrl) {
         setConfig({
           webAppUrl: firebaseConfig.webAppUrl,
@@ -162,16 +167,18 @@ export default function App() {
     });
 
     // 3. Products Firebase Sync
-    const unsubProducts = subscribeProducts((firebaseProducts) => {
+    unsubProducts = subscribeProducts((firebaseProducts) => {
       if (firebaseProducts && firebaseProducts.length > 0) {
         setProducts(firebaseProducts);
       }
     });
 
+    }); // end waitForAuth
+
     return () => {
-      unsubShop();
-      unsubConfig();
-      unsubProducts();
+      unsubShop?.();
+      unsubConfig?.();
+      unsubProducts?.();
     };
   }, []);
 
