@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Remix Invoice \u0026 Billing System",
+  "description": "Google Sheets \u0026 Apps Script powered Invoice and Billing System with real-time stock tracking and print layout.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

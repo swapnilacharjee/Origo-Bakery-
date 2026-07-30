@@ -1,0 +1,57 @@
+{
+  "entities": {
+    "shop_settings": {
+      "title": "Shop Settings",
+      "description": "Branding, contact info, logo, watermark, and bank details for the bakery invoice system",
+      "properties": {
+        "shopName": { "type": "string", "description": "Shop name" },
+        "shopAddress": { "type": "string", "description": "Shop address" },
+        "shopPhone": { "type": "string", "description": "Shop phone number" },
+        "shopEmail": { "type": "string", "description": "Shop email address" },
+        "shopWebsite": { "type": "string", "description": "Shop website" },
+        "facebookPageName": { "type": "string", "description": "Facebook page display name" },
+        "facebookUrl": { "type": "string", "description": "Facebook page link" },
+        "shopLogoUrl": { "type": "string", "description": "Logo URL" },
+        "watermarkUrl": { "type": "string", "description": "Watermark URL" },
+        "watermarkOpacity": { "type": "number", "description": "Watermark opacity" },
+        "currencySymbol": { "type": "string", "description": "Currency symbol" },
+        "vatRate": { "type": "number", "description": "VAT / Tax percentage" },
+        "termsConditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Terms and conditions list"
+        },
+        "bankDetails": {
+          "type": "object",
+          "description": "Bank account details"
+        },
+        "updatedAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["shopName", "shopAddress", "shopPhone"]
+    },
+    "app_config": {
+      "title": "App Config",
+      "description": "Google Sheets Apps Script deployment URL and sync state",
+      "properties": {
+        "webAppUrl": { "type": "string", "description": "Apps Script Web App URL" },
+        "isConnected": { "type": "boolean", "description": "Sync status" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": []
+    },
+    "products": {
+      "title": "Products",
+      "description": "Bakery product catalog items",
+      "properties": {
+        "id": { "type": "string", "description": "Unique product ID" },
+        "name": { "type": "string", "description": "Product name" },
+        "category": { "type": "string", "description": "Product category" },
+        "price": { "type": "number", "description": "Price per unit/lb" },
+        "unit": { "type": "string", "description": "Unit (Pcs, Lb, Box, etc)" },
+        "code": { "type": "string", "description": "Product code" },
+        "description": { "type": "string", "description": "Description" }
+      },
+      "required": ["id", "name", "price"]
+    }
+  }
+}

@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@layer utilities {
+  @media print {
+    /* Preserve exact background colors, text colors, borders, and vectors in print */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    /* Page body resets for A4 portrait */
+    html, body {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 210mm !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Hide all non-printable UI elements during print */
+    .no-print,
+    header,
+    nav,
+    aside,
+    button,
+    footer,
+    form,
+    .toast-container,
+    .modal-overlay {
+      display: none !important;
+    }
+
+    /* Hide all page contents by default when printing */
+    body * {
+      visibility: hidden !important;
+    }
+
+    /* Reveal strictly the printable invoice container and all its children */
+    #printable-invoice-container,
+    #printable-invoice-container *,
+    .printable-invoice,
+    .printable-invoice * {
+      visibility: visible !important;
+    }
+
+    /* Printable invoice — multi-page friendly */
+    #printable-invoice-container,
+    .printable-invoice {
+      display: block !important;
+      position: static !important;
+      width: 100% !important;
+      height: auto !important;
+      min-height: unset !important;
+      max-height: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      border: none !important;
+      background: #ffffff !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Pad background mode: no padding on outer container */
+    #printable-invoice-container.pad-mode {
+      padding: 0 !important;
+    }
+
+    /* Ensure SVG icons remain visible with crisp black stroke in print */
+    svg:not(.watermark-container svg) {
+      display: inline-block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      stroke: #000000 !important;
+      color: #000000 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Preserve faint watermark background opacity in print */
+    .watermark-container,
+    .watermark-container img,
+    .watermark-container svg,
+    .watermark-svg-wrapper {
+      opacity: 0.07 !important;
+    }
+
+    /* Ensure table and box borders stay crisp black in print */
+    .border,
+    .border-b,
+    .border-t,
+    .border-l,
+    .border-r,
+    .border-black,
+    table,
+    th,
+    td {
+      border-color: #000000 !important;
+      border-style: solid !important;
+      border-width: 1px !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* 0.2in top/bottom, 0.5in left/right on every page */
+    @page {
+      margin: 0.2in 0.5in;
+      size: A4 portrait;
+    }
+  }
+
+  @media screen {
+    .print-only {
+      display: none !important;
+    }
+    .offscreen-print-container {
+      position: absolute !important;
+      left: -9999px !important;
+      top: 0 !important;
+      width: 210mm !important;
+      min-height: 297mm !important;
+      background: white !important;
+      pointer-events: none !important;
+      opacity: 1 !important;
+      z-index: -9999 !important;
+    }
+  }
+}
+
+
