@@ -58,6 +58,7 @@ export const BillingForm: React.FC<BillingFormProps> = ({
   const todayISO = new Date().toISOString().split('T')[0];
   const [invoiceDate, setInvoiceDate] = useState<string>(todayISO);
   const [mfgDate, setMfgDate] = useState<string>(todayISO);
+  const [expiryDate, setExpiryDate] = useState<string>(todayISO);
   const [deliveryDate, setDeliveryDate] = useState<string>(todayISO);
   const [batchNo, setBatchNo] = useState<string>('');
 
@@ -208,6 +209,7 @@ export const BillingForm: React.FC<BillingFormProps> = ({
       id: invoiceId,
       date: formattedInvDate,
       mfgDate: formattedMfgDate,
+      expiryDate: formatDateString(expiryDate),
       deliveryDate: formattedDeliveryDate,
       batchNo: batchNo.trim() || invoiceDate.replace(/-/g, ''),
       productName: items.map(i => i.productName).join(', ') || 'No Item Selected',
@@ -239,6 +241,7 @@ export const BillingForm: React.FC<BillingFormProps> = ({
     lessAdvance,
     invoiceDate,
     mfgDate,
+    expiryDate,
     deliveryDate,
     batchNo,
     customerName,
@@ -286,6 +289,7 @@ export const BillingForm: React.FC<BillingFormProps> = ({
       setCompanyName('');
       setInvoiceDate(todayISO);
       setMfgDate(todayISO);
+      setExpiryDate(todayISO);
       setDeliveryDate(todayISO);
       setBatchNo('');
       setInvoiceId('INV-' + Math.floor(100000 + Math.random() * 900000));
@@ -330,6 +334,7 @@ export const BillingForm: React.FC<BillingFormProps> = ({
       setCompanyName('');
       setInvoiceDate(todayISO);
       setMfgDate(todayISO);
+      setExpiryDate(todayISO);
       setDeliveryDate(todayISO);
       setBatchNo('');
       setInvoiceId('INV-' + Math.floor(100000 + Math.random() * 900000));
@@ -676,15 +681,15 @@ export const BillingForm: React.FC<BillingFormProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-700 mb-1">
-                    Mfg Date
-                  </label>
-                  <input
-                    type="date"
-                    value={mfgDate}
-                    onChange={(e) => setMfgDate(e.target.value)}
-                    className="w-full border border-slate-300 rounded-xl px-2.5 py-1.5 text-xs text-slate-900 bg-white focus:ring-2 focus:ring-indigo-500 font-medium"
-                  />
+                  <label className="block text-[11px] font-semibold text-slate-700 mb-1">Mfg Date</label>
+                  <input type="date" value={mfgDate} onChange={(e) => setMfgDate(e.target.value)}
+                    className="w-full border border-slate-300 rounded-xl px-2.5 py-1.5 text-xs text-slate-900 bg-white focus:ring-2 focus:ring-indigo-500 font-medium" />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-semibold text-slate-700 mb-1">Exp Date</label>
+                  <input type="date" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)}
+                    className="w-full border border-slate-300 rounded-xl px-2.5 py-1.5 text-xs text-slate-900 bg-white focus:ring-2 focus:ring-indigo-500 font-medium" />
                 </div>
 
                 <div>

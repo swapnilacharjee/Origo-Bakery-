@@ -320,6 +320,7 @@ export const InvoicePrintTemplate: React.FC<InvoicePrintTemplateProps> = ({
                   <p style={{ margin: '0 0 4px 0' }}><span style={{ fontWeight: '600' }}>Payment Method:</span> {invoice.paymentMethod || 'Cash'}</p>
                   <p style={{ margin: '0 0 4px 0' }}><span style={{ fontWeight: '600' }}>Batch No.</span> {invoice.batchNo || 'N/A'}</p>
                   <p style={{ margin: '0 0 4px 0' }}><span style={{ fontWeight: '600' }}>Mfg Date:</span> {invoice.mfgDate || 'N/A'}</p>
+                  <p style={{ margin: '0 0 4px 0' }}><span style={{ fontWeight: '600' }}>Exp Date:</span> {invoice.expiryDate || 'N/A'}</p>
                   <p style={{ margin: 0 }}><span style={{ fontWeight: '600' }}>Delivery Date:</span> {invoice.deliveryDate || 'N/A'}</p>
                 </div>
               </div>
@@ -554,6 +555,9 @@ export const InvoicePrintTemplate: React.FC<InvoicePrintTemplateProps> = ({
             </p>
             <p className="font-medium">
               <span className="font-semibold">Mfg Date:</span> {invoice.mfgDate || 'N/A'}
+            </p>
+            <p className="font-medium">
+              <span className="font-semibold">Exp Date:</span> {invoice.expiryDate || 'N/A'}
             </p>
             <p className="font-medium">
               <span className="font-semibold">Delivery Date:</span> {invoice.deliveryDate || 'N/A'}

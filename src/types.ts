@@ -23,6 +23,7 @@ export interface Invoice {
   date: string; // Date formatted DD-MM-YYYY or YYYY-MM-DD
   batchNo?: string; // e.g. 20260701
   mfgDate?: string; // e.g. 20-07-2026
+  expiryDate?: string; // e.g. 20-07-2026
   deliveryDate?: string; // e.g. 20-07-2026
   items: InvoiceItem[];
   productName: string; // Primary or comma-joined for sheet summary

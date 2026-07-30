@@ -684,8 +684,8 @@ export const generateAndDownloadPdf = async (
     // --- Customer Info & Invoice Meta Boxes (Two Side-by-Side Boxes) ---
     doc.setDrawColor(0, 0, 0);
     doc.setLineWidth(0.3);
-    doc.rect(14, currentY, 88, 29);
-    doc.rect(108, currentY, 88, 29);
+    doc.rect(14, currentY, 88, 33);
+    doc.rect(108, currentY, 88, 33);
 
     // Customer Box Left
     doc.setFont('Helvetica', 'normal');
@@ -724,9 +724,10 @@ export const generateAndDownloadPdf = async (
     doc.text(`Payment Method: ${paymentMethod}`, 111, currentY + 13);
     doc.text(`Batch No. ${batchNo}`, 111, currentY + 17);
     doc.text(`Mfg Date: ${mfgDate}`, 111, currentY + 21);
-    doc.text(`Delivery Date: ${deliveryDate}`, 111, currentY + 25);
+    doc.text(`Exp Date: ${cleanPdfText(invoice.expiryDate || 'N/A', 'N/A')}`, 111, currentY + 25);
+    doc.text(`Delivery Date: ${deliveryDate}`, 111, currentY + 29);
 
-    currentY += 34;
+    currentY += 38;
 
     // --- Items Table ---
     const itemsMeta = (invoice.items && invoice.items.length > 0)
