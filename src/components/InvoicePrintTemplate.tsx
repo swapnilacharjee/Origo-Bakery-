@@ -333,8 +333,13 @@ export const InvoicePrintTemplate: React.FC<InvoicePrintTemplateProps> = ({
             <div className="relative z-10 pt-4 mt-auto flex justify-between items-end gap-6">
               <div className="text-[13px] text-black space-y-0.5 max-w-[65%]">
                 <p className="font-bold text-black mb-0.5">Terms & Condition:</p>
-                <ol className="list-decimal list-inside space-y-0.5 text-[12px] font-medium leading-tight pl-0.5">
-                  {terms.map((term, idx) => <li key={idx}>{term.replace(/^\d+\.\s*/, '')}</li>)}
+                <ol className="space-y-0.5 text-[12px] font-medium leading-tight list-none pl-0">
+                  {terms.map((term, idx) => (
+                    <li key={idx} className="flex gap-1">
+                      <span className="shrink-0">{idx + 1}.</span>
+                      <span>{term.replace(/^\d+\.\s*/, '')}</span>
+                    </li>
+                  ))}
                 </ol>
               </div>
               <div className="text-center w-48 shrink-0 pb-1">
@@ -574,10 +579,11 @@ export const InvoicePrintTemplate: React.FC<InvoicePrintTemplateProps> = ({
         {/* Terms & Condition (Left) */}
         <div className="text-[13px] text-black space-y-0.5 max-w-[65%]">
           <p className="font-bold text-black mb-0.5">Terms & Condition:</p>
-          <ol className="list-decimal list-inside space-y-0.5 text-[12px] font-medium leading-tight pl-0.5">
+          <ol className="space-y-0.5 text-[12px] font-medium leading-tight list-none pl-0">
             {terms.map((term, idx) => (
-              <li key={idx}>
-                {term.replace(/^\d+\.\s*/, '')}
+              <li key={idx} className="flex gap-1">
+                <span className="shrink-0">{idx + 1}.</span>
+                <span>{term.replace(/^\d+\.\s*/, '')}</span>
               </li>
             ))}
           </ol>
