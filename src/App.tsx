@@ -139,7 +139,6 @@ export default function App() {
     let unsubConfig: (() => void) | undefined;
     let unsubProducts: (() => void) | undefined;
 
-    waitForAuth().then(() => {
     // 1. Shop Settings Firebase Sync
     unsubShop = subscribeShopSettings((firebaseSettings) => {
       setShopSettings(prev => ({
@@ -172,8 +171,6 @@ export default function App() {
         setProducts(firebaseProducts);
       }
     });
-
-    }); // end waitForAuth
 
     return () => {
       unsubShop?.();

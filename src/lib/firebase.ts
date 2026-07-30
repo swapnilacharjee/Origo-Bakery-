@@ -62,16 +62,20 @@ const PRODUCTS_COLL = collection(db, 'products');
  * Realtime listener or fetch for Shop Settings
  */
 export const subscribeShopSettings = (onUpdate: (settings: ShopSettings) => void) => {
-  return onSnapshot(SHOP_SETTINGS_DOC, {
-    next: (snapshot) => {
-      if (snapshot.exists()) {
-        onUpdate(snapshot.data() as ShopSettings);
+  let unsub: (() => void) | undefined;
+  waitForAuth().then(() => {
+    unsub = onSnapshot(SHOP_SETTINGS_DOC, {
+      next: (snapshot) => {
+        if (snapshot.exists()) {
+          onUpdate(snapshot.data() as ShopSettings);
+        }
+      },
+      error: (err) => {
+        console.info('Firestore shop settings operating in offline/fallback mode:', sanitizeLog(err.message));
       }
-    },
-    error: (err) => {
-      console.info('Firestore shop settings operating in offline/fallback mode:', sanitizeLog(err.message));
-    }
+    });
   });
+  return () => unsub?.();
 };
 
 export const saveShopSettingsToFirebase = async (settings: ShopSettings): Promise<void> => {
@@ -89,16 +93,20 @@ export const saveShopSettingsToFirebase = async (settings: ShopSettings): Promis
  * Realtime listener or fetch for Apps Script Config
  */
 export const subscribeAppConfig = (onUpdate: (config: AppsScriptConfig) => void) => {
-  return onSnapshot(APP_CONFIG_DOC, {
-    next: (snapshot) => {
-      if (snapshot.exists()) {
-        onUpdate(snapshot.data() as AppsScriptConfig);
+  let unsub: (() => void) | undefined;
+  waitForAuth().then(() => {
+    unsub = onSnapshot(APP_CONFIG_DOC, {
+      next: (snapshot) => {
+        if (snapshot.exists()) {
+          onUpdate(snapshot.data() as AppsScriptConfig);
+        }
+      },
+      error: (err) => {
+        console.info('Firestore app config operating in offline/fallback mode:', sanitizeLog(err.message));
       }
-    },
-    error: (err) => {
-      console.info('Firestore app config operating in offline/fallback mode:', sanitizeLog(err.message));
-    }
+    });
   });
+  return () => unsub?.();
 };
 
 export const saveAppConfigToFirebase = async (config: AppsScriptConfig): Promise<void> => {
@@ -116,20 +124,24 @@ export const saveAppConfigToFirebase = async (config: AppsScriptConfig): Promise
  * Realtime listener or fetch for Products
  */
 export const subscribeProducts = (onUpdate: (products: Product[]) => void) => {
-  return onSnapshot(PRODUCTS_COLL, {
-    next: (snapshot) => {
-      const list: Product[] = [];
-      snapshot.forEach((docSnap) => {
-        list.push(docSnap.data() as Product);
-      });
-      if (list.length > 0) {
-        onUpdate(list);
+  let unsub: (() => void) | undefined;
+  waitForAuth().then(() => {
+    unsub = onSnapshot(PRODUCTS_COLL, {
+      next: (snapshot) => {
+        const list: Product[] = [];
+        snapshot.forEach((docSnap) => {
+          list.push(docSnap.data() as Product);
+        });
+        if (list.length > 0) {
+          onUpdate(list);
+        }
+      },
+      error: (err) => {
+        console.info('Firestore products operating in offline/fallback mode:', sanitizeLog(err.message));
       }
-    },
-    error: (err) => {
-      console.info('Firestore products operating in offline/fallback mode:', sanitizeLog(err.message));
-    }
+    });
   });
+  return () => unsub?.();
 };
 
 export const saveProductToFirebase = async (product: Product): Promise<void> => {
